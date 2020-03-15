@@ -92,5 +92,17 @@ namespace RPGM.Gameplay
             spriteRenderer = GetComponent<SpriteRenderer>();
             pixelPerfectCamera = GameObject.FindObjectOfType<PixelPerfectCamera>();
         }
+
+        public Vector3 SavePosition()
+        {
+            // Returns Player information as JSON string
+            return transform.position;
+        }
+
+        public void LoadPosition(Vector3 pos)
+        {
+            // Loads the JSON string to the player
+            transform.position = pos;
+        }
     }
 }

@@ -5,6 +5,7 @@ using RPGM.Core;
 using RPGM.Gameplay;
 using RPGM.UI;
 using UnityEngine;
+using System.Linq;
 
 namespace RPGM.Gameplay
 {
@@ -74,6 +75,8 @@ namespace RPGM.Gameplay
         public void RegisterStoryItem(string ID)
         {
             storyItems.Add(ID);
+            Debug.Log("Added Story Item: " + ID);
+            Debug.Log(this.storyItems.Count);
         }
 
         public bool HasSeenStoryItem(string ID)
@@ -98,6 +101,21 @@ namespace RPGM.Gameplay
         public bool HasMet(GameObject owner)
         {
             return conversations.ContainsKey(owner);
+        }
+
+        public void LoadGame(PlayerSave save)
+        {
+            // Loads game items
+            player.LoadPosition(save.position);
+        }
+
+        public String SaveGame()
+        {
+            PlayerSave save = new PlayerSave()
+            {
+                position = player.SavePosition()
+            };
+            return JsonUtility.ToJson(save);
         }
     }
 }
